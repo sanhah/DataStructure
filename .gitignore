@@ -12,6 +12,7 @@
 # 
 .vscode/
 main.dSYM/
+build/
 
 #
 .DS_Store
