@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.20.0)
 project(CS_DS LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -10,5 +10,5 @@ include_directories(
     usr/include
 )
 
-set(PROJECT_SOURCES main.cpp src/SinglyLinkedList.cpp )
+set(PROJECT_SOURCES main.cpp src/SinglyLinkedList.hpp )
 add_executable(${CMAKE_PROJECT_NAME} ${PROJECT_SOURCES})
