@@ -5,7 +5,8 @@ using namespace std;
 
 
 int main(void) {
-    SinglyLinkedList<double> list(0.1);
+    SinglyLinkedList<double> list;
+    list.append(0.1);
     list.printList();
     list.append(0.2);
     list.printList();

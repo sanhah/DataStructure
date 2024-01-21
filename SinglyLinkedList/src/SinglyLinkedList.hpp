@@ -13,16 +13,10 @@ struct SingleNode {
 template <typename T>
 class SinglyLinkedList {
     public:
-        SinglyLinkedList(T initElement) {
+        SinglyLinkedList(void) {
             // init linked list
             head = nullptr;
             tail = nullptr;
-
-            // add init node
-            SingleNode<T>* initNode = new SingleNode<T>;
-            initNode->data = initElement;
-            head = initNode;
-            tail = initNode;
         }
 
         ~SinglyLinkedList(void) {
@@ -40,7 +34,11 @@ class SinglyLinkedList {
             additionNode->next = nullptr;
 
             // add linked list
-            tail->next = additionNode;
+            if (isEmpty()) {
+                head = additionNode;
+            } else {
+                tail->next = additionNode;
+            }
 
             // update tail
             tail = additionNode;
