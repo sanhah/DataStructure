@@ -109,47 +109,53 @@ class SinglyLinkedList {
 
         bool remove(int32_t idx) {
             bool ret = true;
+            bool passed = false;
 
-            // remove linked list
-            SingleNode<T>* previousNode = nullptr;
-            SingleNode<T>* tmpRemoveNode = nullptr;
-
-            if (head == nullptr) {
+            if (isEmpty()) {
                 std::cout << "empty list, need to remove linked list" << std::endl;
                 ret = false;
             }
 
+            // invalid index error
             if (ret && (idx < 0)) {
                 ret = false;
-                std::cout << "exceed index, out of range" << std::endl;
+                std::cout << "Error: Index " << idx << " is out of range" << std::endl;
             }
 
+            // remove linked list
+            // step 1. remove node at the front of list
+            SingleNode<T>* tmpRemoveNode = nullptr;
             if (ret && (idx == 0)) {
                 tmpRemoveNode = head;
                 head = tmpRemoveNode->next;
-                if (head == nullptr) {
+                if (tail == tmpRemoveNode) {
                     tail = head;
                 }
+                passed = true;
             }
 
-            if (ret && (idx > 0)) {
+            // step 2. find node to remove data
+            SingleNode<T>* previousNode = nullptr;
+            if (ret && (passed == false) && (idx > 0)) {
                 previousNode = find(idx - 1);
 
-                if (ret && (previousNode == nullptr)) {
+                // step 2.1 invalid index error
+                if (ret && (passed == false) && ((previousNode == nullptr) || (previousNode == tail))) {
                     ret = false;
-                    std::cout << "fail to find node" << std::endl;
+                    passed = true;
+                    std::cout << "Error: Index " << idx << " is out of range, fail to find node" << std::endl;
                 }
-                if (ret && (previousNode == tail)) {
-                    ret = false;
-                    std::cout << idx << "th node does not exist" << std::endl;
-                } else if (ret && (previousNode != tail)) {
+
+                // step 2.2 remove node at the middle of list
+                if (ret && (passed == false) && (previousNode != tail)) {
                     tmpRemoveNode = previousNode->next;
                     previousNode->next = tmpRemoveNode->next;
+
+                    // step 2.2.1 if remove tail node, update tail
                     if (previousNode->next == nullptr) {
                         tail = previousNode;
                     }
-                } else {
-                    // do nothing
+                    passed = true;
                 }
             }
 
