@@ -209,7 +209,7 @@ class SinglyLinkedList {
                 }
             }
             std::cout << "tail: " << tail << std::endl;
-            std::cout << "=============================" << std::endl;
+            std::cout << "=============================\n" << std::endl;
         }
 
     private:
