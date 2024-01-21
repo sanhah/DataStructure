@@ -29,6 +29,10 @@ class SinglyLinkedList {
             head = nullptr;
         }
 
+        bool isEmpty(void) {
+            return (head == nullptr);
+        }
+
         void append(T additionElement) {
             // create node
             SingleNode<T>* additionNode = new SingleNode<T>;
