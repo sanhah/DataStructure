@@ -48,6 +48,13 @@ class SinglyLinkedList {
 
         bool insert(T insertionElement, int32_t idx) {
             bool ret = true;
+            bool passed = false;
+
+            // invalid index error
+            if (ret && (idx < 0)) {
+                ret = false;
+                std::cout << "Error: Index " << idx << " is out of range" << std::endl;
+            }
 
             // create node
             SingleNode<T>* insertionNode = new SingleNode<T>;
@@ -55,32 +62,45 @@ class SinglyLinkedList {
             insertionNode->next = nullptr;
 
             // add linked list
-            SingleNode<T>* previousNode = nullptr;
-            if (ret && (idx < 0)) {
-                ret = false;
-                std::cout << "exceed index, out of range" << std::endl;
+            // step 1. empty list, add first node
+            if (ret && isEmpty()) {
+                std::cout << "list is empty, initialize list with this data" << std::endl; 
+                head = insertionNode;
+                tail = insertionNode;
+                passed = true;
             }
 
-            if (ret && (idx == 0)) {
+            // step 2. insert data at the front of list
+            if (ret && (passed == false) && (idx == 0)) {
                 insertionNode->next = head;
                 head = insertionNode;
+                passed = true;
             }
 
-            if (ret && (idx > 0)) {
+            // step 2. find space to insert data
+            SingleNode<T>* previousNode = nullptr;
+            if (ret && (passed == false) && (idx > 0)) {
                 previousNode = find(idx - 1);
 
+                // step 2.1 invalid index error
                 if (ret && (previousNode == nullptr)) {
                     ret = false;
-                    std::cout << "fail to find node" << std::endl;
+                    passed == true;
+                    std::cout << "Error: Index " << idx << " is out of range, fail to find node" << std::endl;
                 }
-                if (ret && (previousNode == tail)) {
-                    previousNode->next = insertionNode;
-                    tail = insertionNode;
-                } else if (ret && (previousNode != tail)) {
+
+                // step 2.2 insert data at the middle of list 
+                if (ret && (passed == false) && (previousNode != tail)) {
                     insertionNode->next = previousNode->next;
                     previousNode->next = insertionNode;
-                } else {
-                    // do nothing
+                    passed = true;
+                }
+
+                // step 2.3 insert data at the tail of list 
+                if (ret && (passed == false) && (previousNode == tail)) {
+                    previousNode->next = insertionNode;
+                    tail = insertionNode;
+                    passed = true;
                 }
             }
 
