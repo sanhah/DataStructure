@@ -58,7 +58,7 @@ class SinglyLinkedList {
             }
 
             if (ret && (idx == 0)) {
-                insertionNode->next = head->next;
+                insertionNode->next = head;
                 head = insertionNode;
             }
 
@@ -76,31 +76,8 @@ class SinglyLinkedList {
                     insertionNode->next = previousNode->next;
                     previousNode->next = insertionNode;
                 } else {
-                    // nothing
+                    // do nothing
                 }
-
-            }
-
-            if (idx == 0) {
-
-            } else if (idx > 0) {
-                previousNode = find(idx - 1);
-                if (previousNode == nullptr) {
-                    ret = false;
-                    std::cout << "fail to find node" << std::endl;
-                }
-            } else {
-
-            }
-
-            if (ret && (previousNode == tail)) {
-                previousNode->next = insertionNode;
-                tail = insertionNode;
-            } else if (ret && (previousNode != tail)) {
-                insertionNode->next = previousNode->next;
-                previousNode->next = insertionNode;
-            } else {
-                // nothing
             }
 
             return ret;
@@ -112,29 +89,44 @@ class SinglyLinkedList {
             // remove linked list
             SingleNode<T>* previousNode = nullptr;
             SingleNode<T>* tmpRemoveNode = nullptr;
-            if (idx == 0) {
+
+            if (head == nullptr) {
+                std::cout << "empty list, need to remove linked list" << std::endl;
+                ret = false;
+            }
+
+            if (ret && (idx < 0)) {
+                ret = false;
+                std::cout << "exceed index, out of range" << std::endl;
+            }
+
+            if (ret && (idx == 0)) {
                 tmpRemoveNode = head;
                 head = tmpRemoveNode->next;
-            } else if (idx > 0) {
+                if (head == nullptr) {
+                    tail = head;
+                }
+            }
+
+            if (ret && (idx > 0)) {
                 previousNode = find(idx - 1);
-                if (previousNode == nullptr) {
+
+                if (ret && (previousNode == nullptr)) {
                     ret = false;
                     std::cout << "fail to find node" << std::endl;
                 }
-            } else {
-                ret = false;
-                std::cout << "exceed index, out of range" << " " << __FUNCTION__ << std::endl;
-            }
-
-            if (ret &&(tmpRemoveNode == tail)) {
-                tmpRemoveNode = previousNode->next;
-                previousNode->next = nullptr;
-                tail = previousNode;
-            } else if (ret && (tmpRemoveNode != tail)) {
-                tmpRemoveNode = previousNode->next;
-                previousNode->next = tmpRemoveNode->next;
-            } else {
-                // nothing
+                if (ret && (previousNode == tail)) {
+                    ret = false;
+                    std::cout << idx << "th node does not exist" << std::endl;
+                } else if (ret && (previousNode != tail)) {
+                    tmpRemoveNode = previousNode->next;
+                    previousNode->next = tmpRemoveNode->next;
+                    if (previousNode->next == nullptr) {
+                        tail = previousNode;
+                    }
+                } else {
+                    // do nothing
+                }
             }
 
             // free memory
@@ -181,6 +173,10 @@ class SinglyLinkedList {
                 std::cout << "idx: " << count << "  data: " << tmp->data << " address: " << tmp << "\n";
                 tmp = tmp->next;
                 count++;
+
+                if (count > 20) {
+                    break;
+                }
             }
             std::cout << "tail: " << tail << std::endl;
             std::cout << "=============================" << std::endl;
