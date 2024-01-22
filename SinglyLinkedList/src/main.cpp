@@ -1,5 +1,4 @@
 #include "SinglyLinkedList.hpp"
-#include <iostream>
 
 using namespace std;
 

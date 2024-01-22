@@ -3,12 +3,7 @@
 
 #include <stdint.h>
 #include <iostream>
-
-template <typename T>
-struct SingleNode {
-    T data;
-    SingleNode<T>* next;
-};
+#include "../../common/common.h"
 
 template <typename T>
 class SinglyLinkedList {
