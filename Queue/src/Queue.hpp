@@ -1,7 +1,9 @@
 #ifndef __QUEUE_H__
 #define __QUEUE_H__
 
-#include "../../SinglyLinkedList/src/SinglyLinkedList.hpp"
+#include <stdint.h>
+#include <iostream>
+#include "../../common/common.h"
 
 template <typename T>
 class Queue {
@@ -69,11 +71,34 @@ class Queue {
                 delete tmpRemoveNode;
             }
 
+            if (isEmpty()) {
+                rearPtr = nullptr;
+            }
+
             return ret;
         }
 
         T front(void) {
-            return frontPtr->data;
+            T ret;
+            if (isEmpty()) {
+                std::cout << "fail to pop data, queue is empty" << std::endl;
+            } else {
+                ret = frontPtr->data;
+            }
+            return ret;
+        }
+
+        void printQueue(void) {
+            SingleNode<T>* tmp = frontPtr;
+            std::cout << "frontPtr: " << frontPtr << std::endl;
+            int32_t count = 0;
+            while (tmp != nullptr) {
+                std::cout << "idx: " << count << "  data: " << tmp->data << " address: " << tmp << "\n";
+                tmp = tmp->next;
+                count++;
+            }
+            std::cout << "rear: " << rearPtr << std::endl;
+            std::cout << "=============================\n" << std::endl;
         }
 
     private:
