@@ -1,68 +1,93 @@
-#include "src/SinglyLinkedList.hpp"
+#include "Queue.hpp"
 #include <iostream>
 
 using namespace std;
 
 
 int main(void) {
-    SinglyLinkedList<double> list(0.1);
-    list.printList();
-    list.append(0.2);
-    list.printList();
-    list.append(0.3);
-    list.printList();
-    list.append(0.4);
-    list.printList();
-    std::cout << "\n======append DONE======\n\n" << std::endl;
+    Queue<double> queue(5);
+    queue.printQueue();
+    queue.enqueue(1.0);
+    queue.printQueue();
+    queue.enqueue(2.0);
+    queue.printQueue();
+    queue.enqueue(3.0);
+    queue.printQueue();
+    queue.enqueue(4.0);
+    queue.printQueue();
+    queue.enqueue(5.0);
+    queue.printQueue();
+    queue.enqueue(6.0);
+    queue.printQueue();
+    queue.enqueue(7.0);
+    queue.printQueue();
 
-    list.insert(-1.0, -1);
-    list.printList();
-    list.insert(0.0, 0);
-    list.printList();
-    list.insert(1.1, 1);
-    list.printList();
-    list.insert(2.2, 2);
-    list.printList();
-    list.insert(8.8, 8);
-    list.printList();
-    list.insert(7.7, 7);
-    list.printList();
-    list.insert(6.6, 6);
-    list.printList();
-    std::cout << "\n======insert DONE======\n\n" << std::endl;
+    std::cout << "\n======enqueue DONE======\n\n" << std::endl;
 
-    list.remove(-1);
-    list.printList();
-    list.remove(0);
-    list.printList();
-    list.remove(5);
-    list.printList();
-    list.remove(6);
-    list.printList();
-    list.remove(100);
-    list.printList();
-    list.remove(5);
-    list.printList();
-    std::cout << "\n======remove DONE======\n\n" << std::endl;
+    double front = queue.front();
+    queue.dequeue();
+    std::cout << "front value: " << front << std::endl;
+    queue.printQueue();
 
-    list.remove(0);
-    list.printList();
-    list.remove(0);
-    list.printList();
-    list.remove(0);
-    list.printList();
-    list.remove(0);
-    list.printList();
-    list.remove(0);
-    list.printList();
-    list.remove(0);
-    list.printList();
-    list.remove(0);
-    list.printList();
-    list.remove(0);
-    list.printList();
-    list.remove(0);
-    list.printList();
+    front = queue.front();
+    queue.dequeue();
+    std::cout << "front value: " << front << std::endl;
+    queue.printQueue();
+
+    front = queue.front();
+    queue.dequeue();
+    std::cout << "front value: " << front << std::endl;
+    queue.printQueue();
+
+    front = queue.front();
+    queue.dequeue();
+    std::cout << "front value: " << front << std::endl;
+    queue.printQueue();
+
+    front = queue.front();
+    queue.dequeue();
+    std::cout << "front value: " << front << std::endl;
+    queue.printQueue();
+
+    front = queue.front();
+    queue.dequeue();
+    std::cout << "front value: " << front << std::endl;
+    queue.printQueue();
+
+    front = queue.front();
+    queue.dequeue();
+    std::cout << "front value: " << front << std::endl;
+    queue.printQueue();
+
+    std::cout << "\n======dequeue DONE======\n\n" << std::endl;
+
+    queue.enqueue(10.0);
+    queue.printQueue();
+    queue.enqueue(20.0);
+    queue.printQueue();
+
+    front = queue.front();
+    queue.dequeue();
+    std::cout << "front value: " << front << std::endl;
+    queue.printQueue();
+
+    queue.enqueue(30.0);
+    queue.printQueue();
+
+    front = queue.front();
+    queue.dequeue();
+    std::cout << "front value: " << front << std::endl;
+    queue.printQueue();
+
+    front = queue.front();
+    queue.dequeue();
+    std::cout << "front value: " << front << std::endl;
+    queue.printQueue();
+
+    queue.enqueue(40.0);
+    queue.printQueue();
+    std::cout << "\n======integration DONE======\n\n" << std::endl;
+
     std::cout << "\n======DONE======\n\n" << std::endl;
 
     return -1;
